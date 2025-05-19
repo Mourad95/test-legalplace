@@ -1,20 +1,17 @@
-import { Drug } from "./pharmacy";
+import { updateNormal }    from "./updaters/normal";
+import { updateHerbalTea } from "./updaters/herbalTea";
+import { updateFervex }    from "./updaters/fervex";
+import { updateMagicPill}  from "./updaters/magicPill";
+import { updateDafalgan }  from "./updaters/dafalgan";
+
+const drugsList = {
+  "Herbal Tea": updateHerbalTea,
+  "Fervex":     updateFervex,
+  "Magic Pill": updateMagicPill,
+  "Dafalgan":   updateDafalgan,
+};
 
 export function updateDrug(drug) {
-  // create new instance
-  const updated = new Drug(drug.name, drug.expiresIn, drug.benefit);
-
-  // before expiration decrement benefit -1
-  if (updated.benefit > 0) {
-    updated.benefit -= 1;
-  }
-
-  // decrement expiresIn
-  updated.expiresIn -= 1;
-
-  // after expiration -1 again
-  if (updated.expiresIn < 0 && updated.benefit > 0) {
-    updated.benefit -= 1;
-  }
-  return updated;
+  const updater = drugsList[drug.name] || updateNormal;
+  return updater(drug);
 }
