@@ -1,4 +1,3 @@
-// src/updaters/dafalgan.js
 
 import { Drug } from "../../pharmacy";
 

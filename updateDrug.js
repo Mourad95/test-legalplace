@@ -4,15 +4,21 @@ import { updateFervex } from "./drug-updaters/fervex/fervex";
 import { updateMagicPill } from "./drug-updaters/magicPill/magicPill";
 import { updateDafalgan } from "./drug-updaters/dafalgan/dafalgan";
 
-const durgsList = {
-  "Herbal Tea": updateHerbalTea,
-  Fervex: updateFervex,
-  "Magic Pill": updateMagicPill,
-  Dafalgan: updateDafalgan,
-};
-
-// Si le nom n’est pas dans registry on tombe sur updateDefaultDrug
 export function updateDrug(drug) {
-  const updater = durgsList[drug.name] || updateDefaultDrug;
-  return updater(drug);
+  switch (drug.name) {
+    case "Herbal Tea":
+      return updateHerbalTea(drug);
+
+    case "Fervex":
+      return updateFervex(drug);
+
+    case "Magic Pill":
+      return updateMagicPill(drug);
+
+    case "Dafalgan":
+      return updateDafalgan(drug);
+
+    default:
+      return updateDefaultDrug(drug);
+  }
 }

@@ -1,4 +1,3 @@
-// src/updaters/default.js
 
 import { Drug } from "../../pharmacy";
 
