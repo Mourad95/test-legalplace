@@ -1,3 +1,4 @@
+import { benefit } from "../../enum/benefit";
 import { Drug } from "../../pharmacy";
 import { updateFervex } from "./fervex";
 
@@ -44,6 +45,6 @@ describe("updateFervex", () => {
   it("never exceed 50", () => {
     const input = new Drug("Fervex", 5, 50);
     const output = updateFervex(input);
-    expect(output.benefit).toBe(50);
+    expect(output.benefit).toBe(benefit.max);
   });
 });
